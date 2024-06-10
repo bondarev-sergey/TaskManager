@@ -27,6 +27,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/users/**").hasRole("ADMIN")
                 .requestMatchers("/tasks/**").authenticated()
+                .requestMatchers("/register").permitAll()
         );
         http.httpBasic(Customizer.withDefaults());
         return http.build();
