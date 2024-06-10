@@ -1,5 +1,6 @@
 package com.example.TaskManager.entity;
 
+import com.example.TaskManager.model.TaskStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +30,7 @@ public class Task {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private String status;
+    private TaskStatus status;
 
     @ManyToOne
     @JoinColumn(name = "assignee_id")

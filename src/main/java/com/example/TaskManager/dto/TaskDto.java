@@ -1,5 +1,6 @@
 package com.example.TaskManager.dto;
 
+import com.example.TaskManager.model.TaskStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +20,7 @@ public class TaskDto {
 
     private LocalDateTime dueDate;
 
-    private String status;
+    private TaskStatus status;
 
     private UserDto assignee;
 
