@@ -23,13 +23,13 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UserDto createUser(UserDto userDto) {
+    public UserDto registerUser(UserDto userDto) {
         User user = new User();
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setRole("ROLE_USER");
+        user.setRole("USER");
 
         User savedUser = userRepository.save(user);
         return toDto(savedUser);
