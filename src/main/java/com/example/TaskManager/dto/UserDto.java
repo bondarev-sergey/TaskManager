@@ -9,6 +9,8 @@ public class UserDto {
 
     private Long id;
 
+    private String roles;
+
     private String email;
 
     private String username;
@@ -16,7 +18,5 @@ public class UserDto {
     private String firstName;
 
     private String lastName;
-
-    private String password;
 
 }
