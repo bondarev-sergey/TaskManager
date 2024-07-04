@@ -1,5 +1,6 @@
 package com.example.TaskManager.service.impl;
 
+import com.example.TaskManager.dto.CreateUserDto;
 import com.example.TaskManager.dto.UserDto;
 import com.example.TaskManager.entity.User;
 import com.example.TaskManager.repository.UserRepository;
@@ -23,13 +24,14 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UserDto registerUser(UserDto userDto) {
+    public UserDto registerUser(CreateUserDto userDto) {
         User user = new User();
+        user.setUsername(userDto.getUsername());
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setRole("USER");
+        user.setRoles(userDto.getRoles());
 
         User savedUser = userRepository.save(user);
         return toDto(savedUser);
@@ -50,7 +52,7 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setRoles(user.getRoles());
 
         User updatedUser = userRepository.save(user);
         return toDto(updatedUser);
@@ -66,6 +68,8 @@ public class UserServiceImpl implements UserService {
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
         userDto.setEmail(user.getEmail());
+        userDto.setRoles(user.getRoles());
+        userDto.setUsername(user.getUsername());
         return userDto;
     }
 

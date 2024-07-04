@@ -1,12 +1,13 @@
 package com.example.TaskManager.service;
 
+import com.example.TaskManager.dto.CreateUserDto;
 import com.example.TaskManager.dto.UserDto;
 
 import java.util.List;
 
 public interface UserService {
 
-    UserDto registerUser(UserDto userDto);
+    UserDto registerUser(CreateUserDto userDto);
 
     UserDto getUserById(Long id);
 
