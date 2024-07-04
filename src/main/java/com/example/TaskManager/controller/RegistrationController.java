@@ -1,5 +1,6 @@
 package com.example.TaskManager.controller;
 
+import com.example.TaskManager.dto.CreateUserDto;
 import com.example.TaskManager.dto.UserDto;
 import com.example.TaskManager.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> registerUser(@RequestBody CreateUserDto userDto) {
         UserDto registeredUser = userService.registerUser(userDto);
         return ResponseEntity.created(URI.create("/users/" + registeredUser.getId()))
                 .body(registeredUser);
