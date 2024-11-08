@@ -27,11 +27,11 @@ public class TaskServiceImpl implements TaskService {
 
     public TaskDto createTask(TaskDto taskDto) {
         Task task = new Task();
-        task.setTitle(taskDto.getTitle());
-        task.setDescription(taskDto.getDescription());
-        task.setCreationDate(taskDto.getCreationDate());
-        task.setDueDate(taskDto.getDueDate());
-        task.setStatus(taskDto.getStatus());
+        task.setTitle(taskDto.title());
+        task.setDescription(taskDto.description());
+        task.setCreationDate(taskDto.creationDate());
+        task.setDueDate(taskDto.dueDate());
+        task.setStatus(taskDto.status());
 
         Task savedTask = taskRepository.save(task);
         return toTaskDto(savedTask);
@@ -49,11 +49,12 @@ public class TaskServiceImpl implements TaskService {
 
     public TaskDto updateTask(Integer id, TaskDto taskDto) {
         Task task = taskRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Task not found"));
-        task.setTitle(taskDto.getTitle());
-        task.setDescription(taskDto.getDescription());
-        task.setDueDate(taskDto.getDueDate());
-        task.setStatus(taskDto.getStatus());
-        task.setAssignee(taskDto.getAssignee() != null ? userRepository.findById(taskDto.getAssignee().getId()).orElseThrow(() -> new EntityNotFoundException("User not found")) : null);
+        task.setTitle(taskDto.title());
+        task.setDescription(taskDto.description());
+        task.setCreationDate(taskDto.creationDate());
+        task.setDueDate(taskDto.dueDate());
+        task.setStatus(taskDto.status());
+//        task.setAssignee(taskDto.getAssignee() != null ? userRepository.findById(taskDto.getAssignee().getId()).orElseThrow(() -> new EntityNotFoundException("User not found")) : null);
 
         Task updatedTask = taskRepository.save(task);
         return toTaskDto(updatedTask);
@@ -64,24 +65,15 @@ public class TaskServiceImpl implements TaskService {
     }
 
     private TaskDto toTaskDto(Task task) {
-        TaskDto taskDto = new TaskDto();
-        taskDto.setId(task.getId());
-        taskDto.setTitle(task.getTitle());
-        taskDto.setDescription(task.getDescription());
-        taskDto.setCreationDate(task.getCreationDate());
-        taskDto.setDueDate(task.getDueDate());
-        taskDto.setStatus(task.getStatus());
-        taskDto.setAssignee(task.getAssignee() != null ? toUserDto(task.getAssignee()) : null);
-        return taskDto;
-    }
-
-    private UserDto toUserDto(User user) {
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setFirstName(user.getFirstName());
-        userDto.setLastName(user.getLastName());
-        userDto.setEmail(user.getEmail());
-        return userDto;
+        return new TaskDto(
+                task.getId(),
+                task.getTitle(),
+                task.getDescription(),
+                task.getCreationDate(),
+                task.getDueDate(),
+                task.getStatus()
+        );
+//        taskDto.setAssignee(task.getAssignee() != null ? toUserDto(task.getAssignee()) : null);
     }
 
 }
