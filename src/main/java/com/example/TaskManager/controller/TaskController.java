@@ -20,7 +20,7 @@ public class TaskController {
     @PostMapping
     public ResponseEntity<TaskDto> createTask(@RequestBody TaskDto taskDto) {
         TaskDto createdTask = taskService.createTask(taskDto);
-        return ResponseEntity.created(URI.create("/tasks/" + createdTask.getId())).body(createdTask);
+        return ResponseEntity.created(URI.create("/tasks/" + createdTask.id())).body(createdTask);
     }
 
     @GetMapping("/{id}")
